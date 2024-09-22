@@ -1,15 +1,36 @@
-# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
+  # https://hub.docker.com/r/mvance/unbound
+  unbound:
+    container_name: unbound
+    hostname: unbound
+    image: mvance/unbound:latest
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+    networks:
+      qnet-vlan0:
+        ipv4_address: 192.168.1.1
+    volumes:
+      - unbound:/opt/unbound/etc/unbound
+      - ./config/unbound.conf:/opt/unbound/etc/unbound/unbound.conf
+      - .config/a-records.conf:/opt/unbound/etc/unbound/a-records.conf
+      - .config/forward-records.conf:/opt/unbound/etc/unbound/forward-records.conf
+      - .config/srv-records.conf:/opt/unbound/etc/unbound/srv-records.conf
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+
+  # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
   pihole:
     container_name: pihole
     hostname: pihole
     image: pihole/pihole:latest
     # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
-      - "80:80/tcp"
+      - 53:53/tcp
+      - 53:53/udp
+      - 67:67/udp # Only required if you are using Pi-hole as your DHCP server
+      - 80:80/tcp
     networks:
       qnet-vlan0:
         ipv4_address: 192.168.0.9
@@ -17,7 +38,7 @@ services:
       TZ: America/New_York
       WEBPASSWORD__FILE: /run/secrets/WEBPASSWORD
       FTLCONF_LOCAL_IPV4: 192.168.0.9
-      PIHOLE_DNS_: 1.1.1.1;8.8.8.8
+      PIHOLE_DNS_: 192.168.1.1
       DNSSEC: true
       DNS_BOGUS_PRIV: false
       DNS_FQDN_REQUIRED: false
@@ -40,12 +61,15 @@ services:
     cap_add:
       - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
     restart: unless-stopped
+    depends_on:
+      - unbound
 
 networks:
   qnet-vlan0:
     external: true
 
 volumes:
+  unbound:
   etc-pihole:
   etc-dnsmasq.d:
 

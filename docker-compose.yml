@@ -65,7 +65,6 @@ networks:
     external: true
 
 volumes:
-  unbound:
   etc-pihole:
   etc-dnsmasq.d:
 

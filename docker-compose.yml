@@ -13,9 +13,9 @@ services:
     volumes:
       - unbound:/opt/unbound/etc/unbound
       - ./config/unbound.conf:/opt/unbound/etc/unbound/unbound.conf
-      - .config/a-records.conf:/opt/unbound/etc/unbound/a-records.conf
-      - .config/forward-records.conf:/opt/unbound/etc/unbound/forward-records.conf
-      - .config/srv-records.conf:/opt/unbound/etc/unbound/srv-records.conf
+      - ./config/a-records.conf:/opt/unbound/etc/unbound/a-records.conf
+      - ./config/forward-records.conf:/opt/unbound/etc/unbound/forward-records.conf
+      - ./config/srv-records.conf:/opt/unbound/etc/unbound/srv-records.conf
     restart: unless-stopped
     cap_add:
       - NET_ADMIN

@@ -32,16 +32,13 @@ services:
         ipv4_address: 192.168.0.9
     environment:
       TZ: America/New_York
-      WEBPASSWORD__FILE: /run/secrets/WEBPASSWORD
+      WEBPASSWORD_FILE: /run/secrets/WEBPASSWORD
       FTLCONF_LOCAL_IPV4: 192.168.0.9
-      PIHOLE_DNS: 192.168.0.8
+      PIHOLE_DNS_: 192.168.0.8
       DNSSEC: true
       DNS_BOGUS_PRIV: false
       DNS_FQDN_REQUIRED: false
       DHCP_ACTIVE: false
-      # DHCP_START: 192.168.0.20
-      # DHCP_END: 192.168.3.254
-      # DHCP_ROUTER: 192.168.0.1
       PIHOLE_DOMAIN: maliam.local
       DHCP_IPv6: false
       VIRTUAL_HOST: pihole

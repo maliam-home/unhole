@@ -70,4 +70,4 @@ volumes:
 
 secrets:
   WEBPASSWORD:
-    file: webpassword.txt
+    file: /share/Volumes/unhole/.secrets/webpassword.txt

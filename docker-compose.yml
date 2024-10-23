@@ -35,16 +35,11 @@ services:
       WEBPASSWORD_FILE: /run/secrets/WEBPASSWORD
       FTLCONF_LOCAL_IPV4: 192.168.0.9
       PIHOLE_DNS_: 192.168.0.8
-      DNSSEC: true
-      DNS_BOGUS_PRIV: false
-      DNS_FQDN_REQUIRED: false
       DHCP_ACTIVE: false
       PIHOLE_DOMAIN: maliam.local
       DHCP_IPv6: false
       VIRTUAL_HOST: pihole
       IPv6: false
-      TEMPERATUREUNIT: f
-      DNSMASQ_LISTENING: all
     volumes:
       - ./pihole/config:/etc/pihole
       - ./pihole/dnsmasq.d:/etc/dnsmasq.d

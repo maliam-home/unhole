@@ -46,8 +46,8 @@ services:
       TEMPERATUREUNIT: f
       DNSMASQ_LISTENING: all
     volumes:
-      - etc-pihole:/etc/pihole
-      - etc-dnsmasq.d:/etc/dnsmasq.d
+      - ./pihole/config:/etc/pihole
+      - ./pihole/dnsmasq.d:/etc/dnsmasq.d
     secrets:
       - WEBPASSWORD
     # https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
@@ -60,10 +60,6 @@ services:
 networks:
   qnet-vlan0:
     external: true
-
-volumes:
-  etc-pihole:
-  etc-dnsmasq.d:
 
 secrets:
   WEBPASSWORD:

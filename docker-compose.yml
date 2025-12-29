@@ -58,7 +58,7 @@ networks:
 
 secrets:
   pihole_webpasswd:
-    file: /share/Apps/unhole/.secrets/webpassword.txt
+    file: /share/stacks/unhole/.secrets/webpassword.txt
 
 volumes:
   unbound-data:
@@ -66,16 +66,16 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /share/Apps/unhole/unbound
+      device: /share/stacks/unhole/unbound
   pihole-config:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /share/Apps/unhole/pihole/config
+      device: /share/stacks/unhole/pihole/config
   pihole-dnsmasq:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /share/Apps/unhole/pihole/dnsmasq.d
+      device: /share/stacks/unhole/pihole/dnsmasq.d

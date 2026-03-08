@@ -22,9 +22,6 @@ services:
       nice:
         soft: -20
         hard: -20
-    security_opt:
-      - apparmor:unconfined
-      - seccomp:unconfined        
 
   # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
   pihole:

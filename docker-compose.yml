@@ -58,6 +58,7 @@ services:
     cap_add:
       - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
       - SYS_NICE
+      - SYS_TIME
     ulimits:
       nice:
         soft: -20

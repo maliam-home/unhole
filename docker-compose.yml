@@ -17,6 +17,7 @@ services:
     cap_add:
       - NET_ADMIN
       - SYS_NICE
+      - SYS_TIME
     ulimits:
       nice:
         soft: -20

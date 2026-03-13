@@ -33,7 +33,7 @@ services:
       - 53:53/tcp
       - 53:53/udp
       # - 67:67/udp # Only required if you are using Pi-hole as your DHCP server
-      - 80:80/tcp
+      - 8080:8080/tcp
     networks:
       mcvlan0:
         ipv4_address: ${PIHOLE_BASE_IP}
@@ -45,7 +45,8 @@ services:
       FTLCONF_dns_upstreams: ${UNBOUND_BRIDGE_IP}
       FTLCONF_dns_domain: ${LOCAL_DOMAIN}
       FTLCONF_dns_reply_host_IPv4: ${PIHOLE_BASE_IP}
-      FTLCONF_webserver_domain: pihole.${LOCAL_DOMAIN}      
+      FTLCONF_webserver_domain: pihole.${LOCAL_DOMAIN}
+      FTLCONF_webserver_port: 8080
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
       FTLCONF_dns_ipv6: false
       FTLCONF_webserver_interface: "0.0.0.0"

@@ -8,8 +8,8 @@ services:
       - 53:53/tcp
       - 53:53/udp
     networks:
-      mcvlan0:
-        ipv4_address: 192.168.0.8
+      proxy:
+        ipv4_address: 172.19.0.8 # From Bridge
     volumes:
       - unbound-data:/opt/unbound/etc/unbound
       - /etc/localtime:/etc/localtime:ro
@@ -37,12 +37,14 @@ services:
     networks:
       mcvlan0:
         ipv4_address: 192.168.0.9
+      proxy:
+        ipv4_address: 172.19.0.9 # From Bridge
     environment:
       TZ: America/New_York
       WEBPASSWORD_FILE: pihole_webpasswd
       FTL_LOCAL_IPV4: 192.168.0.9
       WEB_BIND_ADDR: 0.0.0.0
-      PIHOLE_DNS_: 192.168.0.8
+      PIHOLE_DNS_: 172.19.0.8 # Unbound on Bridge
       DHCP_ACTIVE: false
       PIHOLE_DOMAIN: maliam.local
       DHCP_IPv6: false
@@ -69,6 +71,8 @@ services:
 
 networks:
   mcvlan0:
+    external: true
+  proxy:
     external: true
 
 secrets:

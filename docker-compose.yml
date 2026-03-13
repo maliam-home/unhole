@@ -9,7 +9,7 @@ services:
       - 53:53/udp
     networks:
       proxy:
-        ipv4_address: 172.19.0.8 # From Bridge
+        ipv4_address: ${UNBOUND_BRIDGE_IP}
     volumes:
       - unbound-data:/opt/unbound/etc/unbound
       - /etc/localtime:/etc/localtime:ro
@@ -36,26 +36,37 @@ services:
       - 80:80/tcp
     networks:
       mcvlan0:
-        ipv4_address: 192.168.0.9
+        ipv4_address: ${PIHOLE_BASE_IP}
       proxy:
-        ipv4_address: 172.19.0.9 # From Bridge
+        ipv4_address: ${PIHOLE_BRIDGE_IP}
     environment:
       TZ: America/New_York
-      WEBPASSWORD_FILE: pihole_webpasswd
-      FTL_LOCAL_IPV4: 192.168.0.9
-      WEB_BIND_ADDR: 0.0.0.0
-      PIHOLE_DNS_: 172.19.0.8 # Unbound on Bridge
-      DHCP_ACTIVE: false
-      PIHOLE_DOMAIN: maliam.local
-      DHCP_IPv6: false
-      VIRTUAL_HOST: pihole
-      IPv6: false
+      FTLCONF_dns_localIPv4: ${PIHOLE_BASE_IP}
+      FTLCONF_dns_upstreams: ${UNBOUND_BRIDGE_IP}
+      FTLCONF_dns_domain: ${LOCAL_DOMAIN}
+      FTLCONF_dns_reply_host_IPv4: ${PIHOLE_BASE_IP}
+      FTLCONF_webserver_domain: pihole.${LOCAL_DOMAIN}      
+      FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
+      FTLCONF_dns_ipv6: false
+      FTLCONF_webserver_interface: "0.0.0.0"
+      FTLCONF_dhcp_active: false
+      FTLCONF_dns_hosts: ${LOCAL_HOSTS}
+      FTLCONF_dns_cnameRecords: ${LOCAL_CNAMES}
+      FTLCONF_dns_queryLogging: true
+      FTLCONF_dns_cache_size: 10000
+      FTLCONF_dns_domain_required: true
+      FTLCONF_dns_bogus_priv: true
+      FTLCONF_dns_listeningMode: "all"
+      FTLCONF_webserver_api_temperatureUnit: "F"
+      FTLCONF_dns_dnssec: true
+      FTLCONF_dns_blocking_enabled: true
+      FTLCONF_dns_revServer_active: true
+      FTLCONF_dns_revServer_network: "192.168.0.0/24"
+      FTLCONF_dns_revServer_target: "192.168.0.1"
+      FTLCONF_dns_revServer_domain: ${LOCAL_DOMAIN}
+    env_file: .env
     volumes:
-      - pihole-config:/etc/pihole
-      - pihole-dnsmasq:/etc/dnsmasq.d
       - /etc/localtime:/etc/localtime:ro
-    secrets:
-      - pihole_webpasswd
     # https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     cap_add:
       - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
@@ -75,10 +86,6 @@ networks:
   proxy:
     external: true
 
-secrets:
-  pihole_webpasswd:
-    file: /opt/stacks/unhole/.secrets/webpassword.txt
-
 volumes:
   unbound-data:
     driver: local
@@ -86,15 +93,3 @@ volumes:
       type: none
       o: bind
       device: /opt/stacks/unhole/unbound
-  pihole-config:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /opt/stacks/unhole/pihole/config
-  pihole-dnsmasq:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /opt/stacks/unhole/pihole/dnsmasq.d

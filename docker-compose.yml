@@ -43,7 +43,9 @@ services:
       TZ: America/New_York
       FTLCONF_dns_localIPv4: ${PIHOLE_BASE_IP}
       FTLCONF_dns_upstreams: ${UNBOUND_BRIDGE_IP}
+      FTLCONF_dns_domain_required: true
       FTLCONF_dns_domain: ${LOCAL_DOMAIN}
+      FTLCONF_dns_localHostsDomain: ${LOCAL_DOMAIN}
       FTLCONF_dns_reply_host_IPv4: ${PIHOLE_BASE_IP}
       FTLCONF_webserver_domain: pihole.${LOCAL_DOMAIN}
       FTLCONF_webserver_port: 8080
@@ -55,16 +57,15 @@ services:
       FTLCONF_dns_cnameRecords: ${LOCAL_CNAMES}
       FTLCONF_dns_queryLogging: true
       FTLCONF_dns_cache_size: 10000
-      FTLCONF_dns_domain_required: true
       FTLCONF_dns_bogus_priv: true
       FTLCONF_dns_listeningMode: "all"
       FTLCONF_webserver_api_temperatureUnit: "F"
       FTLCONF_dns_dnssec: true
       FTLCONF_dns_blocking_enabled: true
-      FTLCONF_dns_revServer_active: true
-      FTLCONF_dns_revServer_network: "192.168.0.0/24"
-      FTLCONF_dns_revServer_target: "192.168.0.1"
-      FTLCONF_dns_revServer_domain: ${LOCAL_DOMAIN}
+      # FTLCONF_dns_revServer_active: true
+      # FTLCONF_dns_revServer_network: "192.168.0.0/24"
+      # FTLCONF_dns_revServer_target: "192.168.0.1"
+      # FTLCONF_dns_revServer_domain: ${LOCAL_DOMAIN}
     env_file: .env
     volumes:
       - /etc/localtime:/etc/localtime:ro

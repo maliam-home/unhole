@@ -53,8 +53,29 @@ services:
       FTLCONF_dns_ipv6: false
       FTLCONF_webserver_interface: "0.0.0.0"
       FTLCONF_dhcp_active: false
-      FTLCONF_dns_hosts: ${LOCAL_HOSTS}
-      FTLCONF_dns_cnameRecords: ${LOCAL_CNAMES}
+      FTLCONF_dns_hosts: |
+        192.168.0.8 unbound.maliam.local
+        192.168.0.9 pinpointer.maliam.local
+        192.168.0.10 wheeljack.maliam.local
+        192.168.0.11 nacelle.maliam.local
+        192.168.0.12 camshaft.maliam.local
+        192.168.0.14 ironhide.maliam.local
+        192.168.0.15 bumblebee.maliam.local
+        192.168.0.16 grimlock.maliam.local
+        192.168.0.17 unicron.maliam.local
+        192.168.0.18 jazz.maliam.local
+        192.168.0.19 photon.maliam.local
+      FTLCONF_dns_cnameRecords: |
+        dns.maliam.local,pinpointer.maliam.local
+        portainer.maliam.local,wheeljack.maliam.local
+        nas.maliam.local,wheeljack.maliam.local
+        media.maliam.local,jazz.maliam.local
+        homeassistant.maliam.local,bumblebee.maliam.local
+        ha.maliam.local,bumblebee.maliam.local
+        home.maliam.local,jazz.maliam.local
+        traefik-dashboard.clickermaster.com,jazz.maliam.local
+        home.clickermaster.com,jazz.maliam.local
+        ha.clickermaster.com,jazz.maliam.local
       FTLCONF_dns_queryLogging: true
       FTLCONF_dns_cache_size: 10000
       FTLCONF_dns_bogus_priv: true

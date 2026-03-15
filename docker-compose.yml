@@ -44,17 +44,14 @@ services:
         ipv4_address: ${PIHOLE_BRIDGE_IP}
     environment:
       TZ: America/New_York
-      FTLCONF_dns_localIPv4: ${PIHOLE_BASE_IP}
       FTLCONF_dns_upstreams: ${UNBOUND_BRIDGE_IP}
-      FTLCONF_dns_domain_required: true
-      FTLCONF_dns_domain: ${LOCAL_DOMAIN}
-      FTLCONF_dns_localHostsDomain: ${LOCAL_DOMAIN}
+      FTLCONF_dns_domainNeeded: true
+      FTLCONF_dns_domain_local: true
+      FTLCONF_dns_domain_name: ${LOCAL_DOMAIN}
       FTLCONF_dns_reply_host_IPv4: ${PIHOLE_BASE_IP}
       FTLCONF_webserver_domain: pihole.${LOCAL_DOMAIN}
-      FTLCONF_webserver_port: ${PIHOLE_HTTP_PORT}
+      FTLCONF_webserver_port: "0.0.0.0:${PIHOLE_HTTP_PORT}"
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
-      FTLCONF_dns_ipv6: false
-      FTLCONF_webserver_interface: "0.0.0.0"
       FTLCONF_dhcp_active: false
       FTLCONF_dns_hosts: |
         192.168.0.9 pinpointer.maliam.local
@@ -80,11 +77,11 @@ services:
         ha.clickermaster.com,jazz.maliam.local
       FTLCONF_dns_queryLogging: true
       FTLCONF_dns_cache_size: 10000
-      FTLCONF_dns_bogus_priv: true
+      FTLCONF_dns_bogusPriv: true
       FTLCONF_dns_listeningMode: "all"
-      FTLCONF_webserver_api_temperatureUnit: "F"
+      FTLCONF_webserver_api_temp_unit: "F"
       FTLCONF_dns_dnssec: true
-      FTLCONF_dns_blocking_enabled: true
+      FTLCONF_dns_blocking_active: true
     env_file: .env
     volumes:
       - /etc/localtime:/etc/localtime:ro

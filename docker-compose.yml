@@ -20,7 +20,7 @@ services:
         soft: -20
         hard: -20
     healthcheck:
-      test: ["CMD", "drill", "@127.0.0.1", "google.com", "+short"]
+      test: ["CMD", "drill", "@127.0.0.1", "google.com"]
       interval: 30s
       timeout: 10s
       retries: 3

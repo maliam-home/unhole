@@ -54,27 +54,26 @@ services:
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
       FTLCONF_dhcp_active: false
       FTLCONF_dns_hosts: |
-        192.168.0.9 pinpointer.maliam.local
-        192.168.0.10 wheeljack.maliam.local
-        192.168.0.11 nacelle.maliam.local
-        192.168.0.12 camshaft.maliam.local
-        192.168.0.14 ironhide.maliam.local
-        192.168.0.15 bumblebee.maliam.local
-        192.168.0.16 grimlock.maliam.local
-        192.168.0.17 unicron.maliam.local
-        192.168.0.18 jazz.maliam.local
-        192.168.0.19 photon.maliam.local
+        192.168.0.9 pinpointer.maliam.net
+        192.168.0.10 wheeljack.maliam.net
+        192.168.0.11 nacelle.maliam.net
+        192.168.0.12 camshaft.maliam.net
+        192.168.0.14 ironhide.maliam.net
+        192.168.0.15 bumblebee.maliam.net
+        192.168.0.16 grimlock.maliam.net
+        192.168.0.17 unicron.maliam.net
+        192.168.0.18 jazz.maliam.net
+        192.168.0.19 photon.maliam.net
       FTLCONF_dns_cnameRecords: |
-        dns.maliam.local,pinpointer.maliam.local
-        portainer.maliam.local,wheeljack.maliam.local
-        nas.maliam.local,wheeljack.maliam.local
-        media.maliam.local,jazz.maliam.local
-        homeassistant.maliam.local,bumblebee.maliam.local
-        ha.maliam.local,bumblebee.maliam.local
-        home.maliam.local,jazz.maliam.local
-        traefik-dashboard.clickermaster.com,jazz.maliam.local
-        home.clickermaster.com,jazz.maliam.local
-        ha.clickermaster.com,jazz.maliam.local
+        dns.maliam.net,pinpointer.maliam.net
+        nas.maliam.net,wheeljack.maliam.net
+        homeassistant.maliam.net,bumblebee.maliam.net
+        home.maliam.net,jazz.maliam.net
+        traefik-dashboard.maliam.net,jazz.maliam.net
+        pihole.maliam.net,jazz.maliam.net
+        portainer.maliam.net,jazz.maliam.net
+        media.maliam.net,jazz.maliam.net
+        ha.maliam.net,jazz.maliam.net
       FTLCONF_dns_queryLogging: true
       FTLCONF_dns_cache_size: 10000
       FTLCONF_dns_bogusPriv: true

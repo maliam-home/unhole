@@ -106,11 +106,11 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
-      - "traefik.http.routers.pihole.rule=Host(`pihole.maliam.net`)"
-      - "traefik.http.routers.pihole.entrypoints=https"
-      - "traefik.http.routers.pihole.tls=true"
-      - "traefik.http.routers.pihole.tls.certresolver=cloudflare"
-      - "traefik.http.services.pihole.loadbalancer.server.port=${PIHOLE_HTTP_PORT}"
+      - "traefik.http.routers.dns.rule=Host(`dns.maliam.net`)"
+      - "traefik.http.routers.dns.entrypoints=https"
+      - "traefik.http.routers.dns.tls=true"
+      - "traefik.http.routers.dns.tls.certresolver=cloudflare"
+      - "traefik.http.services.dns.loadbalancer.server.port=${PIHOLE_HTTP_PORT}"
     sysctls:
       - net.ipv4.conf.all.arp_ignore=1
       - net.ipv4.conf.all.arp_announce=2    

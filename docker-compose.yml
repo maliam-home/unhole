@@ -6,7 +6,7 @@ services:
     image: mvance/unbound:1.21.1
     networks:
       dns_net:
-        ipv4_address: ${UNBOUND_BRIDGE_IP}
+        ipv4_address: '${UNBOUND_BRIDGE_IP}'
     ports:
       - 5353:53/tcp
       - 5353:53/udp
@@ -46,7 +46,7 @@ services:
       proxy:
     environment:
       TZ: America/New_York
-      FTLCONF_dns_upstreams: ${UNBOUND_BRIDGE_IP}
+      FTLCONF_dns_upstreams: '${UNBOUND_BRIDGE_IP}'
       FTLCONF_dns_domainNeeded: true
       FTLCONF_dns_domain_local: true
       FTLCONF_dns_domain_name: ${LOCAL_DOMAIN}

@@ -111,6 +111,9 @@ services:
       - "traefik.http.routers.pihole.tls=true"
       - "traefik.http.routers.pihole.tls.certresolver=cloudflare"
       - "traefik.http.services.pihole.loadbalancer.server.port=${PIHOLE_HTTP_PORT}"
+    sysctls:
+      - net.ipv4.conf.all.arp_ignore=1
+      - net.ipv4.conf.all.arp_announce=2    
 
 networks:
   macvlan0:

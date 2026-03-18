@@ -22,12 +22,12 @@ services:
       nice:
         soft: -20
         hard: -20
-    healthcheck:
-      test: ["CMD", "drill", "@127.0.0.1:5353", "google.com"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
+    # healthcheck:
+    #   test: ["CMD", "drill", "@127.0.0.1:5353", "google.com"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+    #   start_period: 10s
 
   # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
   pihole:

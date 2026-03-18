@@ -106,8 +106,8 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
+      - "traefik.http.routers.dns.entrypoints=websecure"
       - "traefik.http.routers.dns.rule=Host(`dns.maliam.net`)"
-      - "traefik.http.routers.dns.entrypoints=https"
       - "traefik.http.routers.dns.tls=true"
       - "traefik.http.routers.dns.tls.certresolver=cloudflare"
       - "traefik.http.services.dns.loadbalancer.server.port=${PIHOLE_HTTP_PORT}"

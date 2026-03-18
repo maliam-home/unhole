@@ -5,7 +5,7 @@ Pi-hole + Unbound DNS stack with ad-blocking, local resolution, and encrypted up
 ## Quick start
 
 1. Copy `.env.example` to `.env` and adjust values
-2. Ensure `proxy` and `macvlan0` networks exist
+2. Ensure `proxy` networks exist
 3. Run `docker compose up -d`
 
 ## Pihole Network
@@ -13,7 +13,6 @@ Pi-hole + Unbound DNS stack with ad-blocking, local resolution, and encrypted up
 ### Network for static IP address
 
 ```sh
-docker network create -d macvlan --opt parent=ens1 --subnet=192.168.0.0/24 --gateway=192.168.0.1 --ip-range=192.168.0.192/26 macvlan0
 docker network create proxy
 ```
 

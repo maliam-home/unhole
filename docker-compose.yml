@@ -5,8 +5,11 @@ services:
     hostname: unbound
     image: mvance/unbound:1.21.1
     networks:
-      proxy:
+      dns_net:
         ipv4_address: ${UNBOUND_BRIDGE_IP}
+    ports:
+      - 5353:53/tcp
+      - 5353:53/udp
     volumes:
       - unbound-data:/opt/unbound/etc/unbound
       - /etc/localtime:/etc/localtime:ro
@@ -38,10 +41,9 @@ services:
       # - 67:67/udp # Only required if you are using Pi-hole as your DHCP server
       - ${PIHOLE_HTTP_PORT}:${PIHOLE_HTTP_PORT}/tcp
     networks:
-      macvlan0:
-        ipv4_address: ${PIHOLE_BASE_IP}
-      proxy:
+      dns_net:
         ipv4_address: ${PIHOLE_BRIDGE_IP}
+      proxy:
     environment:
       TZ: America/New_York
       FTLCONF_dns_upstreams: ${UNBOUND_BRIDGE_IP}
@@ -54,24 +56,21 @@ services:
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
       FTLCONF_dhcp_active: false
       FTLCONF_dns_hosts: |
-        192.168.0.9 pinpointer.maliam.net
+        192.168.0.9 jazz.maliam.net
         192.168.0.10 wheeljack.maliam.net
         192.168.0.11 nacelle.maliam.net
         192.168.0.12 camshaft.maliam.net
+        192.168.0.13 photon.maliam.net
         192.168.0.14 ironhide.maliam.net
         192.168.0.15 bumblebee.maliam.net
         192.168.0.16 grimlock.maliam.net
         192.168.0.17 unicron.maliam.net
-        192.168.0.18 jazz.maliam.net
-        192.168.0.19 photon.maliam.net
       FTLCONF_dns_cnameRecords: |
-        dns.maliam.net,pinpointer.maliam.net
+        dns.maliam.net,jazz.maliam.net
         nas.maliam.net,wheeljack.maliam.net
-        homeassistant.maliam.net,bumblebee.maliam.net
-        home.maliam.net,jazz.maliam.net
         traefik-dashboard.maliam.net,jazz.maliam.net
+        home.maliam.net,jazz.maliam.net
         pihole.maliam.net,jazz.maliam.net
-        portainer.maliam.net,jazz.maliam.net
         media.maliam.net,jazz.maliam.net
         ha.maliam.net,jazz.maliam.net
       FTLCONF_dns_queryLogging: true
@@ -106,18 +105,25 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
-      - "traefik.http.routers.pihole.rule=Host(`pihole.maliam.net`)"
-      - "traefik.http.routers.pihole.entrypoints=https"
-      - "traefik.http.routers.pihole.tls=true"
-      - "traefik.http.routers.pihole.tls.certresolver=cloudflare"
+      - "traefik.http.routers.pihole.entrypoints=http"
+      - "traefik.http.routers.pihole.rule=Host(`pihole.${LOCAL_DOMAIN}`)"
+      - "traefik.http.middlewares.pihole-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.pihole.middlewares=pihole-https-redirect"
+      - "traefik.http.routers.pihole-secure.entrypoints=https"
+      - "traefik.http.routers.pihole-secure.rule=Host(`pihole.${LOCAL_DOMAIN}`)"
+      - "traefik.http.routers.pihole-secure.tls=true"
+      - "traefik.http.routers.pihole-secure.service=pihole"
       - "traefik.http.services.pihole.loadbalancer.server.port=${PIHOLE_HTTP_PORT}"
     sysctls:
       - net.ipv4.conf.all.arp_ignore=1
       - net.ipv4.conf.all.arp_announce=2    
 
 networks:
-  macvlan0:
-    external: true
+  dns_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${DNS_NET_SUBNET}
   proxy:
     external: true
 

@@ -65,12 +65,12 @@ services:
         192.168.0.18 jazz.maliam.net
         192.168.0.19 photon.maliam.net
       FTLCONF_dns_cnameRecords: |
-        dns.maliam.net,pinpointer.maliam.net
+        dns.maliam.net,jazz.maliam.net
         nas.maliam.net,wheeljack.maliam.net
         homeassistant.maliam.net,bumblebee.maliam.net
         home.maliam.net,jazz.maliam.net
         traefik-dashboard.maliam.net,jazz.maliam.net
-        pihole.maliam.net,jazz.maliam.net
+        pihole.maliam.net,pinpointer.maliam.net
         portainer.maliam.net,jazz.maliam.net
         media.maliam.net,jazz.maliam.net
         ha.maliam.net,jazz.maliam.net

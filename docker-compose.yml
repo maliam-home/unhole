@@ -38,10 +38,10 @@ services:
       # - 67:67/udp # Only required if you are using Pi-hole as your DHCP server
       - ${PIHOLE_HTTP_PORT}:${PIHOLE_HTTP_PORT}/tcp
     networks:
-      proxy:
-        ipv4_address: ${PIHOLE_BRIDGE_IP}
       macvlan0:
         ipv4_address: ${PIHOLE_BASE_IP}
+      proxy:
+        ipv4_address: ${PIHOLE_BRIDGE_IP}
     environment:
       TZ: America/New_York
       FTLCONF_dns_upstreams: ${UNBOUND_BRIDGE_IP}

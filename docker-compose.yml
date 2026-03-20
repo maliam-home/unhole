@@ -58,21 +58,20 @@ services:
         192.168.0.10 wheeljack.maliam.net
         192.168.0.11 nacelle.maliam.net
         192.168.0.12 camshaft.maliam.net
+        192.168.0.13 photon.maliam.net
         192.168.0.14 ironhide.maliam.net
         192.168.0.15 bumblebee.maliam.net
         192.168.0.16 grimlock.maliam.net
         192.168.0.17 unicron.maliam.net
         192.168.0.18 jazz.maliam.net
-        192.168.0.19 photon.maliam.net
       FTLCONF_dns_cnameRecords: |
         dns.maliam.net,jazz.maliam.net
+        pihole.maliam.net,pinpointer.maliam.net
         nas.maliam.net,wheeljack.maliam.net
-        homeassistant.maliam.net,bumblebee.maliam.net
         home.maliam.net,jazz.maliam.net
         traefik-dashboard.maliam.net,jazz.maliam.net
-        pihole.maliam.net,pinpointer.maliam.net
-        portainer.maliam.net,jazz.maliam.net
         media.maliam.net,jazz.maliam.net
+        homeassistant.maliam.net,bumblebee.maliam.net
         ha.maliam.net,jazz.maliam.net
       FTLCONF_dns_queryLogging: true
       FTLCONF_dns_cache_size: 10000

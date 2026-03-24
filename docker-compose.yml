@@ -73,11 +73,12 @@ services:
         media.maliam.net,jazz.maliam.net
         homeassistant.maliam.net,bumblebee.maliam.net
         ha.maliam.net,jazz.maliam.net
+        unraid.maliam.net,jazz.maliam.net
       FTLCONF_dns_queryLogging: true
       FTLCONF_dns_cache_size: 10000
       FTLCONF_dns_bogusPriv: true
-      FTLCONF_dns_listeningMode: "all"
-      FTLCONF_webserver_api_temp_unit: "F"
+      FTLCONF_dns_listeningMode: 'ALL'
+      FTLCONF_webserver_api_temp_unit: 'F'
       FTLCONF_dns_dnssec: true
       FTLCONF_dns_blocking_active: true
     env_file: .env
@@ -85,7 +86,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
     # https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     cap_add:
-      - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
+      # - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
       - SYS_NICE
       - SYS_TIME
     ulimits:

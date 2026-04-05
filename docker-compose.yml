@@ -64,6 +64,8 @@ services:
         192.168.0.16 grimlock.maliam.net
         192.168.0.17 unicron.maliam.net
         192.168.0.18 jazz.maliam.net
+        192.168.0.19 jolt.maliam.net
+        192.168.0.20 jolt.maliam.net
       FTLCONF_dns_cnameRecords: |
         dns.maliam.net,jazz.maliam.net
         pihole.maliam.net,pinpointer.maliam.net

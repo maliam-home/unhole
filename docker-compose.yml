@@ -5,7 +5,7 @@ services:
     hostname: unbound
     image: mvance/unbound:1.21.1
     networks:
-      proxy:
+      proxy0:
         ipv4_address: ${UNBOUND_BRIDGE_IP}
     volumes:
       - unbound-data:/opt/unbound/etc/unbound
@@ -33,14 +33,14 @@ services:
     image: pihole/pihole:2025.11.1
     # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
     ports:
-      - 53:53/tcp
-      - 53:53/udp
+      - ${PIHOLE_BASE_IP}:53:53/tcp
+      - ${PIHOLE_BASE_IP}:53:53/udp
       # - 67:67/udp # Only required if you are using Pi-hole as your DHCP server
-      - ${PIHOLE_HTTP_PORT}:${PIHOLE_HTTP_PORT}/tcp
+      - ${PIHOLE_BASE_IP}:${PIHOLE_HTTP_PORT}:${PIHOLE_HTTP_PORT}/tcp
     networks:
-      macvlan0:
-        ipv4_address: ${PIHOLE_BASE_IP}
-      proxy:
+      # macvlan0:
+      #   ipv4_address: ${PIHOLE_BASE_IP}
+      proxy0:
         ipv4_address: ${PIHOLE_BRIDGE_IP}
     environment:
       TZ: America/New_York
@@ -54,7 +54,7 @@ services:
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
       FTLCONF_dhcp_active: false
       FTLCONF_dns_hosts: |
-        192.168.0.9 pinpointer.maliam.net
+        192.168.0.9 jolt.maliam.net
         192.168.0.10 wheeljack.maliam.net
         192.168.0.11 nacelle.maliam.net
         192.168.0.12 camshaft.maliam.net
@@ -64,10 +64,9 @@ services:
         192.168.0.16 grimlock.maliam.net
         192.168.0.17 unicron.maliam.net
         192.168.0.18 jazz.maliam.net
-        192.168.0.19 jolt.maliam.net
       FTLCONF_dns_cnameRecords: |
-        dns.maliam.net,jazz.maliam.net
-        pihole.maliam.net,pinpointer.maliam.net
+        pihole.maliam.net,jolt.maliam.net
+        dns.maliam.net,jolt.maliam.net
         nas.maliam.net,wheeljack.maliam.net
         home.maliam.net,jazz.maliam.net
         traefik-dashboard.maliam.net,jazz.maliam.net
@@ -117,9 +116,9 @@ services:
       - net.ipv4.conf.all.arp_announce=2    
 
 networks:
-  macvlan0:
-    external: true
-  proxy:
+  # macvlan0:
+  #   external: true
+  proxy0:
     external: true
 
 volumes:

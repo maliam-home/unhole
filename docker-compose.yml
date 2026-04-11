@@ -68,12 +68,12 @@ services:
         pihole.maliam.net,jolt.maliam.net
         dns.maliam.net,jolt.maliam.net
         nas.maliam.net,wheeljack.maliam.net
-        home.maliam.net,jazz.maliam.net
-        traefik-dashboard.maliam.net,jazz.maliam.net
-        media.maliam.net,jazz.maliam.net
+        home.maliam.net,jolt.maliam.net
+        traefik-dashboard.maliam.net,jolt.maliam.net
+        media.maliam.net,jolt.maliam.net
         homeassistant.maliam.net,bumblebee.maliam.net
-        ha.maliam.net,jazz.maliam.net
-        unraid.maliam.net,jazz.maliam.net
+        ha.maliam.net,jolt.maliam.net
+        unraid.maliam.net,jolt.maliam.net
       FTLCONF_dns_queryLogging: true
       FTLCONF_dns_cache_size: 10000
       FTLCONF_dns_bogusPriv: true
@@ -105,7 +105,7 @@ services:
       start_period: 30s
     labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=proxy"
+      - "traefik.docker.network=proxy0"
       - "traefik.http.routers.dns.entrypoints=websecure"
       - "traefik.http.routers.dns.rule=Host(`dns.maliam.net`)"
       - "traefik.http.routers.dns.tls=true"

@@ -73,6 +73,7 @@ services:
         media.maliam.net,jolt.maliam.net
         homeassistant.maliam.net,bumblebee.maliam.net
         ha.maliam.net,jolt.maliam.net
+        hikvision.maliam.net,jolt.maliam.net
         unraid.maliam.net,jolt.maliam.net
       FTLCONF_dns_queryLogging: true
       FTLCONF_dns_cache_size: 10000

@@ -65,6 +65,7 @@ services:
         192.168.0.17 unicron.maliam.net
         192.168.0.18 jazz.maliam.net
       FTLCONF_dns_cnameRecords: |
+        www.maliam.net,jolt.maliam.net
         pihole.maliam.net,jolt.maliam.net
         dns.maliam.net,jolt.maliam.net
         nas.maliam.net,wheeljack.maliam.net

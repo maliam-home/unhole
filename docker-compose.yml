@@ -68,6 +68,7 @@ services:
         www.maliam.net,jolt.maliam.net
         pihole.maliam.net,jolt.maliam.net
         dns.maliam.net,jolt.maliam.net
+        auth.maliam.net,jolt.maliam.net
         nas.maliam.net,wheeljack.maliam.net
         home.maliam.net,jolt.maliam.net
         traefik-dashboard.maliam.net,jolt.maliam.net

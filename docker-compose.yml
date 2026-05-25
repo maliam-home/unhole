@@ -72,6 +72,7 @@ services:
         nas.maliam.net,wheeljack.maliam.net
         home.maliam.net,jolt.maliam.net
         traefik-dashboard.maliam.net,jolt.maliam.net
+        photos.maliam.net,jolt.maliam.net
         media.maliam.net,jolt.maliam.net
         homeassistant.maliam.net,bumblebee.maliam.net
         ha.maliam.net,jolt.maliam.net
